@@ -1,0 +1,107 @@
+[
+  {
+    "id": "b1",
+    "name": "Priya Sharma",
+    "location": { "lat": 12.9716, "lng": 77.5946, "city": "Bengaluru" },
+    "wishlist": ["electronics", "phones"],
+    "trustScore": 0.92
+  },
+  {
+    "id": "b2",
+    "name": "Rahul Mehta",
+    "location": { "lat": 12.9352, "lng": 77.6245, "city": "Bengaluru" },
+    "wishlist": ["baby", "clothing"],
+    "trustScore": 0.85
+  },
+  {
+    "id": "b3",
+    "name": "Anjali Nair",
+    "location": { "lat": 13.0012, "lng": 77.5929, "city": "Bengaluru" },
+    "wishlist": ["footwear", "clothing"],
+    "trustScore": 0.78
+  },
+  {
+    "id": "b4",
+    "name": "Karthik Iyer",
+    "location": { "lat": 12.9616, "lng": 77.6412, "city": "Bengaluru" },
+    "wishlist": ["kitchen", "appliances"],
+    "trustScore": 0.88
+  },
+  {
+    "id": "b5",
+    "name": "Sneha Rao",
+    "location": { "lat": 12.9810, "lng": 77.5550, "city": "Bengaluru" },
+    "wishlist": ["electronics", "appliances"],
+    "trustScore": 0.71
+  },
+  {
+    "id": "b6",
+    "name": "Amit Joshi",
+    "location": { "lat": 19.0760, "lng": 72.8777, "city": "Mumbai" },
+    "wishlist": ["phones", "electronics"],
+    "trustScore": 0.94
+  },
+  {
+    "id": "b7",
+    "name": "Deepika Patel",
+    "location": { "lat": 19.1136, "lng": 72.8697, "city": "Mumbai" },
+    "wishlist": ["baby", "footwear"],
+    "trustScore": 0.82
+  },
+  {
+    "id": "b8",
+    "name": "Rohan Gupta",
+    "location": { "lat": 19.0454, "lng": 72.8636, "city": "Mumbai" },
+    "wishlist": ["clothing", "footwear"],
+    "trustScore": 0.67
+  },
+  {
+    "id": "b9",
+    "name": "Meera Jain",
+    "location": { "lat": 19.0895, "lng": 72.8656, "city": "Mumbai" },
+    "wishlist": ["kitchen", "appliances"],
+    "trustScore": 0.90
+  },
+  {
+    "id": "b10",
+    "name": "Vijay Kulkarni",
+    "location": { "lat": 18.9902, "lng": 72.8183, "city": "Mumbai" },
+    "wishlist": ["electronics", "phones"],
+    "trustScore": 0.76
+  },
+  {
+    "id": "b11",
+    "name": "Sunita Reddy",
+    "location": { "lat": 17.3850, "lng": 78.4867, "city": "Hyderabad" },
+    "wishlist": ["baby", "clothing"],
+    "trustScore": 0.88
+  },
+  {
+    "id": "b12",
+    "name": "Naveen Kumar",
+    "location": { "lat": 17.4126, "lng": 78.4071, "city": "Hyderabad" },
+    "wishlist": ["footwear", "electronics"],
+    "trustScore": 0.73
+  },
+  {
+    "id": "b13",
+    "name": "Lakshmi Devi",
+    "location": { "lat": 17.3616, "lng": 78.4747, "city": "Hyderabad" },
+    "wishlist": ["kitchen", "appliances"],
+    "trustScore": 0.95
+  },
+  {
+    "id": "b14",
+    "name": "Sanjay Verma",
+    "location": { "lat": 17.4399, "lng": 78.3489, "city": "Hyderabad" },
+    "wishlist": ["phones", "clothing"],
+    "trustScore": 0.80
+  },
+  {
+    "id": "b15",
+    "name": "Pooja Singh",
+    "location": { "lat": 17.3700, "lng": 78.5500, "city": "Hyderabad" },
+    "wishlist": ["baby", "footwear"],
+    "trustScore": 0.86
+  }
+]
