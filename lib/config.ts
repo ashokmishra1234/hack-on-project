@@ -11,6 +11,21 @@ export const CONDITION_RESALE_FACTORS: Record<string, number> = {
 export const DEMAND_FACTOR_MIN = 0.90;
 export const DEMAND_FACTOR_MAX = 1.15;
 
+// ── Routing cost model ────────────────────────────────────────────────────────
+// ship_direct: local pickup + per-km
+export const LOCAL_HANDLING_COST = 40;       // ₹ fixed local pickup/delivery fee
+export const LOCAL_COST_PER_KM = 1.5;        // ₹ per km for ship_direct leg
+
+// warehouse route: base handling + per-km
+export const BASE_WAREHOUSE_HANDLING = 120;  // ₹ fixed warehouse processing fee
+export const WAREHOUSE_COST_PER_KM = 2.0;   // ₹ per km for warehouse leg
+
+// Fixed demo warehouse distance — kept large for dramatic savings comparison
+export const WAREHOUSE_DISTANCE_KM = 600;
+
+// Carbon savings
+export const ROUTE_CARBON_PER_KM = 0.12;    // kg CO₂ per km (road freight, per shipment)
+
 // INR per kilometre for direct peer-to-peer shipping
 export const COST_PER_KM = 2.5;
 

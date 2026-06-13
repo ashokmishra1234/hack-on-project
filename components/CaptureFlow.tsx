@@ -263,7 +263,7 @@ export default function CaptureFlow({ item }: { item: Item }) {
         {/* Step header */}
         <div className="flex items-start gap-3">
           <div
-            className="w-11 h-11 rounded-xl flex items-center justify-center text-2xl flex-shrink-0 mt-0.5"
+            className="w-11 h-11 rounded-xl flex items-center justify-center text-2xl shrink-0 mt-0.5"
             style={{ background: 'var(--surface-raised)' }}
           >
             {currentStep.icon}
@@ -300,14 +300,14 @@ export default function CaptureFlow({ item }: { item: Item }) {
         {/* ── Photo slot ───────────────────────────────────────────────────── */}
         {currentSlot ? (
           /* Preview */
-          <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden">
+          <div className="relative w-full aspect-4/3 rounded-xl overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={currentSlot.previewUrl}
               alt={currentStep.label}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
             {/* Accepted badge */}
             <div
               className="absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1"
@@ -332,7 +332,7 @@ export default function CaptureFlow({ item }: { item: Item }) {
         ) : (
           /* Empty drop zone */
           <div
-            className="w-full aspect-[4/3] rounded-xl border-2 border-dashed flex flex-col items-center justify-center gap-5"
+            className="w-full aspect-4/3 rounded-xl border-2 border-dashed flex flex-col items-center justify-center gap-5"
             style={{ borderColor: checking ? 'var(--accent)' : 'var(--border)' }}
           >
             {checking ? (
@@ -383,7 +383,7 @@ export default function CaptureFlow({ item }: { item: Item }) {
               border: '1px solid rgba(239,68,68,0.25)',
             }}
           >
-            <span className="flex-shrink-0 mt-px">⚠</span>
+            <span className="shrink-0 mt-px">⚠</span>
             <span className="leading-relaxed">{error}</span>
           </div>
         )}
@@ -445,7 +445,7 @@ export default function CaptureFlow({ item }: { item: Item }) {
         className="rounded-2xl p-4 border flex items-center gap-3"
         style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}
       >
-        <p className="text-xs font-medium flex-shrink-0" style={{ color: 'var(--muted)' }}>
+        <p className="text-xs font-medium shrink-0" style={{ color: 'var(--muted)' }}>
           All shots:
         </p>
         <div className="flex gap-2">
@@ -455,7 +455,7 @@ export default function CaptureFlow({ item }: { item: Item }) {
             return (
               <div
                 key={s.id}
-                className="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 transition-all"
+                className="w-14 h-14 rounded-xl overflow-hidden shrink-0 transition-all"
                 style={{
                   border: `2px solid ${
                     isCurrent
@@ -484,7 +484,7 @@ export default function CaptureFlow({ item }: { item: Item }) {
             );
           })}
         </div>
-        <p className="text-xs ml-auto flex-shrink-0" style={{ color: 'var(--muted)' }}>
+        <p className="text-xs ml-auto shrink-0" style={{ color: 'var(--muted)' }}>
           {slots.filter(Boolean).length}/{STEPS.length}
         </p>
       </div>

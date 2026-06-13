@@ -51,11 +51,12 @@
       "grade": {
         "condition": "damaged",
         "defects": [
-          "Severely cracked front screen",
-          "Heavily shattered back glass"
+          "severely cracked front screen",
+          "severely cracked back glass",
+          "visible frame damage near camera module"
         ],
-        "summary": "The phone exhibits severe cracking on both the front screen and the back glass panel.",
-        "confidence": 0.7
+        "summary": "The phone exhibits extensive damage, including a severely cracked front screen, a severely cracked back glass, and visible damage to the frame.",
+        "confidence": 0.95
       },
       "price": 2850,
       "matchedBuyerId": "b1",
@@ -63,6 +64,16 @@
       "riskFlags": [
         "needs_data_wipe"
       ]
+    },
+    "route": {
+      "path": "repair",
+      "matchedBuyerId": "b1",
+      "cost": {
+        "shipDirect": 40,
+        "warehouseAlt": 1320,
+        "carbonKgSaved": 72
+      },
+      "reason": "Broken or missing parts detected — professional repair needed to restore resale value."
     }
   },
   {

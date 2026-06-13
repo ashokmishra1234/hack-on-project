@@ -11,11 +11,5 @@ export default async function ResultPage({
   const item = getItem(id);
   if (!item) notFound();
 
-  return (
-    <AssessmentView
-      itemId={item.id}
-      itemTitle={item.title}
-      initialAssessment={item.assessment}
-    />
-  );
+  return <AssessmentView itemId={item.id} itemTitle={item.title} />;
 }

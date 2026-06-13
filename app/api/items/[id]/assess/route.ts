@@ -4,10 +4,12 @@ import { gradePhotos } from '@/lib/grader';
 import { computePrice } from '@/lib/pricing';
 import { matchBuyer } from '@/lib/matching';
 import { getRiskFlags } from '@/lib/risk';
-import type { Assessment } from '@/lib/types';
+import { computeRoute } from '@/lib/router';
+import type { Assessment, RouteDecision } from '@/lib/types';
 
 export type AssessResponse = {
   assessment: Assessment;
+  route: RouteDecision;
   buyer: { id: string; name: string; city: string } | null;
 };
 
@@ -22,13 +24,15 @@ export async function POST(
 
     const buyers = getBuyers();
 
-    // ── Return cached assessment if already graded ───────────────────────────
+    // ── Return cached result if already graded ───────────────────────────────
     if (item.assessment) {
+      const route = computeRoute(item, item.assessment, buyers); // always recompute (pure fn)
       const buyer = item.assessment.matchedBuyerId
-        ? buyers.find((b) => b.id === item.assessment!.matchedBuyerId) ?? null
+        ? (buyers.find((b) => b.id === item.assessment!.matchedBuyerId) ?? null)
         : null;
       return NextResponse.json({
         assessment: item.assessment,
+        route,
         buyer: buyer ? { id: buyer.id, name: buyer.name, city: buyer.location.city } : null,
       } satisfies AssessResponse);
     }
@@ -49,10 +53,13 @@ export async function POST(
     // ── 4. Risk flags ────────────────────────────────────────────────────────
     const riskFlags = getRiskFlags(item);
 
-    // ── 5. Assemble & persist ────────────────────────────────────────────────
+    // ── 5. Assemble & persist assessment ─────────────────────────────────────
     const assessment: Assessment = { grade, price, matchedBuyerId, nearbyDemand, riskFlags };
     item.assessment = assessment;
     saveItem(item);
+
+    // ── 6. Compute route (not saved until user confirms) ──────────────────────
+    const route = computeRoute(item, assessment, buyers);
 
     const matchedBuyer = matchedBuyerId
       ? (buyers.find((b) => b.id === matchedBuyerId) ?? null)
@@ -60,6 +67,7 @@ export async function POST(
 
     return NextResponse.json({
       assessment,
+      route,
       buyer: matchedBuyer
         ? { id: matchedBuyer.id, name: matchedBuyer.name, city: matchedBuyer.location.city }
         : null,
