@@ -16,6 +16,7 @@ export async function POST(
     const photos: string[] = Array.isArray(body.photos) ? body.photos : [];
 
     item.photos = photos;
+    item.assessment = undefined; // clear stale grading when photos are replaced
     saveItem(item);
 
     return NextResponse.json({ ok: true, photoCount: photos.length });

@@ -1,11 +1,15 @@
 // Tunable constants — adjust between experiments without touching business logic.
 
 export const CONDITION_RESALE_FACTORS: Record<string, number> = {
-  like_new: 0.70,
-  good: 0.50,
-  fair: 0.30,
-  damaged: 0.10,
+  like_new: 0.75,
+  good: 0.55,
+  fair: 0.35,
+  damaged: 0.15,
 };
+
+// Demand multiplier range — scales linearly with nearbyDemand (0–1)
+export const DEMAND_FACTOR_MIN = 0.90;
+export const DEMAND_FACTOR_MAX = 1.15;
 
 // INR per kilometre for direct peer-to-peer shipping
 export const COST_PER_KM = 2.5;
