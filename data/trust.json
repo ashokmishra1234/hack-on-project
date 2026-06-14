@@ -1,10 +1,11 @@
 {
   "user-current": {
     "userId": "user-current",
-    "score": 95,
+    "score": 90,
     "totalDeals": 5,
     "acceptedDeals": 5,
     "disputeCount": 0,
-    "lastUpdated": "2026-06-14T05:44:08.798Z"
+    "lastUpdated": "2026-06-14T09:29:42.489Z",
+    "mismatchCount": 1
   }
 }

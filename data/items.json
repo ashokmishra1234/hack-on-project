@@ -61,16 +61,16 @@
       "status": "fail",
       "result": {
         "isMatch": false,
-        "observedProduct": "iPhone (various models)",
+        "observedProduct": "Apple iPhone 16 with cracked screen and back",
         "brandMatch": false,
         "categoryMatch": true,
         "confidence": 1,
-        "reason": "The customer photos clearly show iPhones (Apple brand) and not a OnePlus phone; visible text confirms 'iPhone' and 'iPhone 16' in one image."
+        "reason": "The customer's photos clearly show an Apple iPhone, identified by the 'About' screen showing 'iPhone 16' and characteristic design, not a OnePlus Nord CE 3 Lite 5G."
       },
-      "consecutiveFailures": 1,
-      "flaggedForReview": false,
+      "consecutiveFailures": 2,
+      "flaggedForReview": true,
       "identityVerified": false,
-      "verifiedAt": "2026-06-14T08:44:44.705Z"
+      "verifiedAt": "2026-06-14T09:29:42.490Z"
     }
   },
   {
