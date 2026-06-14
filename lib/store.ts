@@ -43,6 +43,13 @@ export function getBuyer(id: string): Buyer | undefined {
   return getBuyers().find((b) => b.id === id);
 }
 
+// Listings (pre-seeded marketplace items with routes already set)
+export function getListings(): Item[] {
+  const file = path.join(DATA_DIR, 'listings.json');
+  if (!fs.existsSync(file)) return [];
+  return readJSON<Item[]>('listings.json');
+}
+
 // Ledger (scaffolded — file created on first write)
 const LEDGER_FILE = 'ledger.json';
 

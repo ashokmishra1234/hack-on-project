@@ -1,0 +1,114 @@
+[
+  {
+    "id": "listing-001",
+    "title": "Sony WF-1000XM4 Earbuds",
+    "category": "electronics",
+    "brand": "Sony",
+    "originalPrice": 19990,
+    "ageMonths": 11,
+    "location": { "lat": 12.9080, "lng": 77.6468, "city": "Bengaluru" },
+    "ownerId": "seller-arjun",
+    "photos": [],
+    "assessment": {
+      "grade": {
+        "condition": "good",
+        "defects": ["minor ear tip wear"],
+        "summary": "Fully functional with minor cosmetic wear on ear tips. Noise cancellation and call quality are excellent.",
+        "confidence": 0.88
+      },
+      "price": 11990,
+      "matchedBuyerId": "b1",
+      "nearbyDemand": 0.8,
+      "riskFlags": []
+    },
+    "route": {
+      "path": "ship_direct",
+      "matchedBuyerId": "b1",
+      "cost": { "shipDirect": 54, "warehouseAlt": 1320, "carbonKgSaved": 70.9 },
+      "reason": "Ship directly to Priya Sharma in Bengaluru — saves ₹1,266 over warehouse and avoids 70.9 kg CO₂."
+    }
+  },
+  {
+    "id": "listing-002",
+    "title": "Campus Spirit Running Shoes UK 9",
+    "category": "footwear",
+    "brand": "Campus",
+    "originalPrice": 2999,
+    "ageMonths": 5,
+    "location": { "lat": 17.4010, "lng": 78.5295, "city": "Hyderabad" },
+    "ownerId": "seller-meena",
+    "photos": [],
+    "assessment": {
+      "grade": {
+        "condition": "like_new",
+        "defects": [],
+        "summary": "Barely worn — sole is clean and upper has zero creasing. Laces still original.",
+        "confidence": 0.93
+      },
+      "price": 2199,
+      "nearbyDemand": 0.3,
+      "riskFlags": []
+    },
+    "route": {
+      "path": "list_hold",
+      "cost": { "shipDirect": 940, "warehouseAlt": 1320, "carbonKgSaved": 0 },
+      "reason": "No nearby buyer found — holding for a local match to minimise shipping distance."
+    }
+  },
+  {
+    "id": "listing-003",
+    "title": "Instant Pot Duo 7-in-1 6L",
+    "category": "kitchen",
+    "brand": "Instant Pot",
+    "originalPrice": 8999,
+    "ageMonths": 20,
+    "location": { "lat": 12.9500, "lng": 77.5900, "city": "Bengaluru" },
+    "ownerId": "seller-preethi",
+    "photos": [],
+    "assessment": {
+      "grade": {
+        "condition": "good",
+        "defects": ["inner pot has minor staining"],
+        "summary": "All functions work perfectly. Stainless steel inner pot shows normal cooking stains that clean off. Lid seal is intact.",
+        "confidence": 0.85
+      },
+      "price": 5199,
+      "matchedBuyerId": "b4",
+      "nearbyDemand": 0.6,
+      "riskFlags": []
+    },
+    "route": {
+      "path": "ship_direct",
+      "matchedBuyerId": "b4",
+      "cost": { "shipDirect": 49, "warehouseAlt": 1320, "carbonKgSaved": 71.3 },
+      "reason": "Ship directly to Karthik Iyer in Bengaluru — saves ₹1,271 over warehouse and avoids 71.3 kg CO₂."
+    }
+  },
+  {
+    "id": "listing-004",
+    "title": "H&M Linen Shirt (L)",
+    "category": "clothing",
+    "brand": "H&M",
+    "originalPrice": 1799,
+    "ageMonths": 13,
+    "location": { "lat": 19.0178, "lng": 72.8478, "city": "Mumbai" },
+    "ownerId": "seller-divya",
+    "photos": [],
+    "assessment": {
+      "grade": {
+        "condition": "fair",
+        "defects": ["small fade near collar", "two loose threads on cuff"],
+        "summary": "Wearable with visible age. Fabric is intact — collar fade and two loose cuff threads are purely cosmetic.",
+        "confidence": 0.80
+      },
+      "price": 590,
+      "nearbyDemand": 0.2,
+      "riskFlags": []
+    },
+    "route": {
+      "path": "list_hold",
+      "cost": { "shipDirect": 940, "warehouseAlt": 1320, "carbonKgSaved": 0 },
+      "reason": "No nearby buyer found — holding for a local match to minimise shipping distance."
+    }
+  }
+]

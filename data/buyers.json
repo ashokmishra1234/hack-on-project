@@ -4,104 +4,281 @@
     "name": "Priya Sharma",
     "location": { "lat": 12.9716, "lng": 77.5946, "city": "Bengaluru" },
     "wishlist": ["electronics", "phones"],
-    "trustScore": 0.92
+    "trustScore": 0.92,
+    "purchaseHistory": [
+      { "category": "phones", "brand": "Samsung" },
+      { "category": "electronics", "brand": "boAt" },
+      { "category": "electronics", "brand": "JBL" }
+    ],
+    "recentlyViewed": ["phones", "electronics", "appliances"],
+    "sizeProfile": {},
+    "priceSensitivity": "mid",
+    "notifyList": [
+      { "category": "phones", "maxPrice": 15000 },
+      { "category": "electronics", "maxPrice": 8000 }
+    ]
   },
   {
     "id": "b2",
     "name": "Rahul Mehta",
     "location": { "lat": 12.9352, "lng": 77.6245, "city": "Bengaluru" },
     "wishlist": ["baby", "clothing"],
-    "trustScore": 0.85
+    "trustScore": 0.85,
+    "purchaseHistory": [
+      { "category": "baby", "brand": "Fisher-Price" },
+      { "category": "clothing", "brand": "H&M" },
+      { "category": "baby", "brand": "Chicco" }
+    ],
+    "recentlyViewed": ["baby", "clothing", "footwear"],
+    "sizeProfile": { "clothingSize": "L" },
+    "priceSensitivity": "deal",
+    "notifyList": [
+      { "category": "baby", "maxPrice": 3000 },
+      { "category": "clothing", "maxPrice": 1500 }
+    ]
   },
   {
     "id": "b3",
     "name": "Anjali Nair",
     "location": { "lat": 13.0012, "lng": 77.5929, "city": "Bengaluru" },
     "wishlist": ["footwear", "clothing"],
-    "trustScore": 0.78
+    "trustScore": 0.78,
+    "purchaseHistory": [
+      { "category": "footwear", "brand": "Nike" },
+      { "category": "clothing", "brand": "Levi's" },
+      { "category": "footwear", "brand": "Puma" }
+    ],
+    "recentlyViewed": ["footwear", "clothing", "accessories"],
+    "sizeProfile": { "shoeSize": "UK 6", "clothingSize": "S" },
+    "priceSensitivity": "mid",
+    "notifyList": [
+      { "category": "footwear", "maxPrice": 5000 },
+      { "category": "clothing", "maxPrice": 2000 }
+    ]
   },
   {
     "id": "b4",
     "name": "Karthik Iyer",
     "location": { "lat": 12.9616, "lng": 77.6412, "city": "Bengaluru" },
     "wishlist": ["kitchen", "appliances"],
-    "trustScore": 0.88
+    "trustScore": 0.88,
+    "purchaseHistory": [
+      { "category": "kitchen", "brand": "Prestige" },
+      { "category": "appliances", "brand": "Philips" },
+      { "category": "kitchen", "brand": "Hawkins" }
+    ],
+    "recentlyViewed": ["kitchen", "appliances"],
+    "sizeProfile": {},
+    "priceSensitivity": "deal",
+    "notifyList": [
+      { "category": "kitchen", "maxPrice": 2000 },
+      { "category": "appliances", "maxPrice": 5000 }
+    ]
   },
   {
     "id": "b5",
     "name": "Sneha Rao",
     "location": { "lat": 12.9810, "lng": 77.5550, "city": "Bengaluru" },
     "wishlist": ["electronics", "appliances"],
-    "trustScore": 0.71
+    "trustScore": 0.71,
+    "purchaseHistory": [
+      { "category": "electronics", "brand": "Sony" },
+      { "category": "appliances", "brand": "Samsung" },
+      { "category": "electronics", "brand": "Apple" }
+    ],
+    "recentlyViewed": ["electronics", "phones", "appliances"],
+    "sizeProfile": {},
+    "priceSensitivity": "premium",
+    "notifyList": [
+      { "category": "electronics", "maxPrice": 20000 }
+    ]
   },
   {
     "id": "b6",
     "name": "Amit Joshi",
     "location": { "lat": 19.0760, "lng": 72.8777, "city": "Mumbai" },
     "wishlist": ["phones", "electronics"],
-    "trustScore": 0.94
+    "trustScore": 0.94,
+    "purchaseHistory": [
+      { "category": "phones", "brand": "Apple" },
+      { "category": "phones", "brand": "OnePlus" },
+      { "category": "electronics", "brand": "JBL" }
+    ],
+    "recentlyViewed": ["phones", "electronics", "accessories"],
+    "sizeProfile": {},
+    "priceSensitivity": "premium",
+    "notifyList": [
+      { "category": "phones", "maxPrice": 25000 }
+    ]
   },
   {
     "id": "b7",
     "name": "Deepika Patel",
     "location": { "lat": 19.1136, "lng": 72.8697, "city": "Mumbai" },
     "wishlist": ["baby", "footwear"],
-    "trustScore": 0.82
+    "trustScore": 0.82,
+    "purchaseHistory": [
+      { "category": "baby", "brand": "Mamas & Papas" },
+      { "category": "footwear", "brand": "Adidas" },
+      { "category": "baby", "brand": "Philips Avent" }
+    ],
+    "recentlyViewed": ["baby", "footwear", "clothing"],
+    "sizeProfile": { "shoeSize": "UK 5", "clothingSize": "M" },
+    "priceSensitivity": "mid",
+    "notifyList": [
+      { "category": "baby", "maxPrice": 5000 },
+      { "category": "footwear", "maxPrice": 4000 }
+    ]
   },
   {
     "id": "b8",
     "name": "Rohan Gupta",
     "location": { "lat": 19.0454, "lng": 72.8636, "city": "Mumbai" },
     "wishlist": ["clothing", "footwear"],
-    "trustScore": 0.67
+    "trustScore": 0.67,
+    "purchaseHistory": [
+      { "category": "clothing", "brand": "Zara" },
+      { "category": "footwear", "brand": "Nike" },
+      { "category": "clothing", "brand": "H&M" }
+    ],
+    "recentlyViewed": ["clothing", "footwear"],
+    "sizeProfile": { "shoeSize": "UK 9", "clothingSize": "L" },
+    "priceSensitivity": "deal",
+    "notifyList": [
+      { "category": "clothing", "maxPrice": 1500 },
+      { "category": "footwear", "maxPrice": 4000 }
+    ]
   },
   {
     "id": "b9",
     "name": "Meera Jain",
     "location": { "lat": 19.0895, "lng": 72.8656, "city": "Mumbai" },
     "wishlist": ["kitchen", "appliances"],
-    "trustScore": 0.90
+    "trustScore": 0.90,
+    "purchaseHistory": [
+      { "category": "kitchen", "brand": "Tefal" },
+      { "category": "appliances", "brand": "LG" },
+      { "category": "kitchen", "brand": "Prestige" }
+    ],
+    "recentlyViewed": ["kitchen", "appliances"],
+    "sizeProfile": {},
+    "priceSensitivity": "mid",
+    "notifyList": [
+      { "category": "kitchen", "maxPrice": 3000 },
+      { "category": "appliances", "maxPrice": 8000 }
+    ]
   },
   {
     "id": "b10",
     "name": "Vijay Kulkarni",
     "location": { "lat": 18.9902, "lng": 72.8183, "city": "Mumbai" },
     "wishlist": ["electronics", "phones"],
-    "trustScore": 0.76
+    "trustScore": 0.76,
+    "purchaseHistory": [
+      { "category": "electronics", "brand": "Samsung" },
+      { "category": "phones", "brand": "Xiaomi" },
+      { "category": "electronics", "brand": "boAt" }
+    ],
+    "recentlyViewed": ["electronics", "phones", "appliances"],
+    "sizeProfile": {},
+    "priceSensitivity": "deal",
+    "notifyList": [
+      { "category": "phones", "maxPrice": 10000 },
+      { "category": "electronics", "maxPrice": 5000 }
+    ]
   },
   {
     "id": "b11",
     "name": "Sunita Reddy",
     "location": { "lat": 17.3850, "lng": 78.4867, "city": "Hyderabad" },
     "wishlist": ["baby", "clothing"],
-    "trustScore": 0.88
+    "trustScore": 0.88,
+    "purchaseHistory": [
+      { "category": "baby", "brand": "Chicco" },
+      { "category": "clothing", "brand": "Mothercare" },
+      { "category": "baby", "brand": "Fisher-Price" }
+    ],
+    "recentlyViewed": ["baby", "clothing"],
+    "sizeProfile": { "clothingSize": "S" },
+    "priceSensitivity": "mid",
+    "notifyList": [
+      { "category": "baby", "maxPrice": 4000 },
+      { "category": "clothing", "maxPrice": 1200 }
+    ]
   },
   {
     "id": "b12",
     "name": "Naveen Kumar",
     "location": { "lat": 17.4126, "lng": 78.4071, "city": "Hyderabad" },
     "wishlist": ["footwear", "electronics"],
-    "trustScore": 0.73
+    "trustScore": 0.73,
+    "purchaseHistory": [
+      { "category": "footwear", "brand": "Puma" },
+      { "category": "electronics", "brand": "boAt" },
+      { "category": "footwear", "brand": "Skechers" }
+    ],
+    "recentlyViewed": ["footwear", "electronics", "phones"],
+    "sizeProfile": { "shoeSize": "UK 10" },
+    "priceSensitivity": "deal",
+    "notifyList": [
+      { "category": "footwear", "maxPrice": 3500 },
+      { "category": "electronics", "maxPrice": 5000 }
+    ]
   },
   {
     "id": "b13",
     "name": "Lakshmi Devi",
     "location": { "lat": 17.3616, "lng": 78.4747, "city": "Hyderabad" },
     "wishlist": ["kitchen", "appliances"],
-    "trustScore": 0.95
+    "trustScore": 0.95,
+    "purchaseHistory": [
+      { "category": "kitchen", "brand": "Butterfly" },
+      { "category": "appliances", "brand": "Bajaj" },
+      { "category": "kitchen", "brand": "Prestige" }
+    ],
+    "recentlyViewed": ["kitchen", "appliances"],
+    "sizeProfile": {},
+    "priceSensitivity": "deal",
+    "notifyList": [
+      { "category": "kitchen", "maxPrice": 2500 },
+      { "category": "appliances", "maxPrice": 6000 }
+    ]
   },
   {
     "id": "b14",
     "name": "Sanjay Verma",
     "location": { "lat": 17.4399, "lng": 78.3489, "city": "Hyderabad" },
     "wishlist": ["phones", "clothing"],
-    "trustScore": 0.80
+    "trustScore": 0.80,
+    "purchaseHistory": [
+      { "category": "phones", "brand": "Samsung" },
+      { "category": "clothing", "brand": "Allen Solly" },
+      { "category": "phones", "brand": "Vivo" }
+    ],
+    "recentlyViewed": ["phones", "clothing", "electronics"],
+    "sizeProfile": { "clothingSize": "XL" },
+    "priceSensitivity": "mid",
+    "notifyList": [
+      { "category": "phones", "maxPrice": 15000 }
+    ]
   },
   {
     "id": "b15",
     "name": "Pooja Singh",
     "location": { "lat": 17.3700, "lng": 78.5500, "city": "Hyderabad" },
     "wishlist": ["baby", "footwear"],
-    "trustScore": 0.86
+    "trustScore": 0.86,
+    "purchaseHistory": [
+      { "category": "baby", "brand": "Pigeon" },
+      { "category": "footwear", "brand": "Keds" },
+      { "category": "baby", "brand": "Tommee Tippee" }
+    ],
+    "recentlyViewed": ["baby", "footwear", "clothing"],
+    "sizeProfile": { "shoeSize": "UK 4", "clothingSize": "XS" },
+    "priceSensitivity": "deal",
+    "notifyList": [
+      { "category": "baby", "maxPrice": 3000 },
+      { "category": "footwear", "maxPrice": 2000 }
+    ]
   }
 ]
