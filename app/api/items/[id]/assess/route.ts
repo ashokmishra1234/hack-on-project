@@ -17,6 +17,13 @@ export async function POST(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
+  if (!process.env.GEMINI_API_KEY) {
+    return NextResponse.json(
+      { error: 'GEMINI_API_KEY not configured — add it to .env and restart the dev server.' },
+      { status: 503 },
+    );
+  }
+
   try {
     const { id } = await params;
     const item = getItem(id);

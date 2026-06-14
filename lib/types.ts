@@ -24,6 +24,30 @@ export type RouteDecision = {
   reason: string;
 };
 
+// ─── Product identity verification ───────────────────────────────────────────
+
+export type VerificationResult = {
+  isMatch: boolean;
+  observedProduct: string;  // short description of what Gemini actually saw
+  brandMatch: boolean;
+  categoryMatch: boolean;
+  confidence: number;       // 0–1
+  reason: string;           // one-sentence explanation
+};
+
+export type VerificationStatus = 'pass' | 'fail' | 'needs_review';
+
+export type VerificationRecord = {
+  status: VerificationStatus;
+  result: VerificationResult;
+  consecutiveFailures: number; // resets to 0 on pass
+  flaggedForReview: boolean;   // true after 2+ consecutive failures
+  identityVerified: boolean;   // true when status === 'pass'
+  verifiedAt: string;          // ISO timestamp
+};
+
+// ─── Core item ────────────────────────────────────────────────────────────────
+
 export type Item = {
   id: string;
   title: string;
@@ -38,6 +62,8 @@ export type Item = {
   };
   ownerId: string;
   photos: string[];
+  referenceImage?: string;       // path under /public/reference/ e.g. "/reference/item-001.jpg"
+  verification?: VerificationRecord;
   assessment?: Assessment;
   route?: RouteDecision;
 };

@@ -9,6 +9,7 @@ export type TrustRecord = {
   totalDeals: number;
   acceptedDeals: number;
   disputeCount: number;
+  mismatchCount?: number; // identity verification failures (each -5 pts)
   lastUpdated: string;    // ISO timestamp
 };
 
@@ -39,12 +40,13 @@ export function computeScore(
   totalDeals: number,
   acceptedDeals: number,
   disputeCount: number,
+  mismatchCount = 0,
 ): number {
   const base = 50;
   const dealBonus = Math.min(totalDeals * 5, 25);
   const accuracyRatio = totalDeals > 0 ? acceptedDeals / totalDeals : 1;
   const accuracyBonus = Math.round(accuracyRatio * 20);
-  const penalty = disputeCount * 10;
+  const penalty = disputeCount * 10 + mismatchCount * 5;
   return Math.max(0, Math.min(100, base + dealBonus + accuracyBonus - penalty));
 }
 
@@ -77,7 +79,7 @@ export function recordDeal(
   const totalDeals   = existing.totalDeals + 1;
   const acceptedDeals = outcome === 'accept' ? existing.acceptedDeals + 1 : existing.acceptedDeals;
   const disputeCount  = outcome === 'dispute' ? existing.disputeCount + 1  : existing.disputeCount;
-  const newScore      = computeScore(totalDeals, acceptedDeals, disputeCount);
+  const newScore      = computeScore(totalDeals, acceptedDeals, disputeCount, existing.mismatchCount ?? 0);
 
   const updated: TrustRecord = {
     userId,
@@ -96,4 +98,29 @@ export function recordDeal(
 
 export function isTrustedSeller(score: number): boolean {
   return score >= 75;
+}
+
+/**
+ * Records one identity-verification mismatch (-5 pts per incident).
+ * Call only when an item is newly flagged for review (2+ consecutive failures).
+ */
+export function recordMismatch(userId: string): { record: TrustRecord; delta: number } {
+  const db = readDB();
+  const existing: TrustRecord = db[userId] ?? { userId, ...NEW_SELLER };
+  const mismatchCount = (existing.mismatchCount ?? 0) + 1;
+  const newScore = computeScore(
+    existing.totalDeals,
+    existing.acceptedDeals,
+    existing.disputeCount,
+    mismatchCount,
+  );
+  const updated: TrustRecord = {
+    ...existing,
+    mismatchCount,
+    score: newScore,
+    lastUpdated: new Date().toISOString(),
+  };
+  db[userId] = updated;
+  writeDB(db);
+  return { record: updated, delta: newScore - existing.score };
 }

@@ -7,7 +7,7 @@ import type { Assessment, RouteDecision } from '@/lib/types';
 import type { AssessResponse } from '@/app/api/items/[id]/assess/route';
 import { WAREHOUSE_DISTANCE_KM, ROUTE_CARBON_PER_KM } from '@/lib/config';
 
-// ─── Shared formatting ────────────────────────────────────────────────────────
+// ─── Formatting ───────────────────────────────────────────────────────────────
 
 function formatINR(n: number) {
   return new Intl.NumberFormat('en-IN', {
@@ -15,7 +15,7 @@ function formatINR(n: number) {
   }).format(n);
 }
 
-// ─── Metadata maps ────────────────────────────────────────────────────────────
+// ─── Metadata ─────────────────────────────────────────────────────────────────
 
 const CONDITION_META: Record<string, { label: string; color: string; bg: string; dots: number }> = {
   like_new: { label: 'Like New', color: '#4ade80', bg: 'rgba(74,222,128,0.12)',  dots: 4 },
@@ -39,7 +39,15 @@ const PATH_META: Record<string, { label: string; icon: string; color: string; bg
   list_hold:   { label: 'Hold & List',  icon: '⏸',  color: '#f97316', bg: 'rgba(249,115,22,0.15)'  },
 };
 
-// ─── Loading state ────────────────────────────────────────────────────────────
+const PATH_CONTEXT: Record<string, string> = {
+  donate:    'A Bridge agent collects the item and delivers it to a verified local cause — no hassle, no trips.',
+  recycle:   'Responsibly dismantled by a certified partner — zero to landfill. You still earn Green Credits.',
+  repair:    'A Bridge partner will assess and quote repair cost before any work begins. No obligation.',
+  refurbish: 'Professionally cleaned and tested before resale — the next buyer gets a higher-trust product.',
+  list_hold: 'Listed on the Bridge marketplace. You\'re notified the moment a buyer is matched.',
+};
+
+// ─── Loading ──────────────────────────────────────────────────────────────────
 
 function LoadingState() {
   return (
@@ -79,6 +87,54 @@ function LoadingState() {
             />
           </div>
         ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── Error state ──────────────────────────────────────────────────────────────
+
+function ErrorState({ message, itemId }: { message: string; itemId: string }) {
+  const isKeyMissing = message.toLowerCase().includes('gemini_api_key') ||
+                       message.toLowerCase().includes('not configured');
+
+  return (
+    <div className="flex flex-col items-center gap-5 py-20 text-center max-w-sm mx-auto">
+      <span className="text-5xl">{isKeyMissing ? '🔑' : '⚠'}</span>
+      <div className="flex flex-col gap-2">
+        <h2 className="text-lg font-bold" style={{ color: 'var(--foreground)' }}>
+          {isKeyMissing ? 'API key missing' : 'Grading failed'}
+        </h2>
+        <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
+          {isKeyMissing
+            ? 'Add GEMINI_API_KEY to your .env file and restart the dev server.'
+            : message}
+        </p>
+      </div>
+      {isKeyMissing && (
+        <div
+          className="rounded-xl px-4 py-3 text-left text-xs font-mono w-full"
+          style={{ background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--muted)' }}
+        >
+          {'# .env'}<br />
+          {'GEMINI_API_KEY=your_key_here'}
+        </div>
+      )}
+      <div className="flex gap-3">
+        <button
+          onClick={() => window.location.reload()}
+          className="text-sm font-semibold px-4 py-2 rounded-full"
+          style={{ background: 'var(--accent)', color: '#fff' }}
+        >
+          Try again
+        </button>
+        <Link
+          href={`/item/${itemId}/capture`}
+          className="text-sm font-semibold px-4 py-2 rounded-full border"
+          style={{ borderColor: 'var(--border)', color: 'var(--muted)' }}
+        >
+          Re-capture
+        </Link>
       </div>
     </div>
   );
@@ -185,38 +241,28 @@ function AssessmentSection({
       </div>
 
       {/* Buyer match */}
-      <div className="rounded-2xl p-4 border flex items-center gap-3"
-        style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
-        <div className="w-10 h-10 rounded-full flex items-center justify-center text-lg flex-shrink-0"
-          style={{ background: 'var(--surface-raised)' }}>👤</div>
-        <div className="flex flex-col gap-0.5 flex-1 min-w-0">
-          <p className="text-xs" style={{ color: 'var(--muted)' }}>Best buyer match</p>
-          {buyer ? (
-            <>
-              <p className="text-sm font-semibold truncate" style={{ color: 'var(--foreground)' }}>{buyer.name}</p>
-              <p className="text-xs" style={{ color: 'var(--muted)' }}>📍 {buyer.city}</p>
-            </>
-          ) : (
-            <p className="text-sm" style={{ color: 'var(--muted)' }}>No match found</p>
-          )}
-        </div>
-        {buyer && (
+      {buyer && (
+        <div className="rounded-2xl p-4 border flex items-center gap-3"
+          style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
+          <div className="w-10 h-10 rounded-full flex items-center justify-center text-lg shrink-0"
+            style={{ background: 'var(--surface-raised)' }}>👤</div>
+          <div className="flex flex-col gap-0.5 flex-1 min-w-0">
+            <p className="text-xs" style={{ color: 'var(--muted)' }}>Best buyer match</p>
+            <p className="text-sm font-semibold truncate" style={{ color: 'var(--foreground)' }}>{buyer.name}</p>
+            <p className="text-xs" style={{ color: 'var(--muted)' }}>📍 {buyer.city}</p>
+          </div>
           <span className="text-xs font-semibold px-2.5 py-1 rounded-full shrink-0"
             style={{ background: 'rgba(74,222,128,0.12)', color: '#4ade80' }}>Matched</span>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Risk flags */}
-      <div className="rounded-2xl p-4 border flex flex-col gap-3"
-        style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
-        <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--muted)' }}>
-          Risk flags
-        </p>
-        {riskFlags.length === 0 ? (
-          <p className="text-sm flex gap-2 items-center" style={{ color: '#4ade80' }}>
-            <span>✓</span> No flags — clear to route
+      {riskFlags.length > 0 && (
+        <div className="rounded-2xl p-4 border flex flex-col gap-3"
+          style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
+          <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--muted)' }}>
+            Risk flags
           </p>
-        ) : (
           <div className="flex flex-col gap-2">
             {riskFlags.map((flag) => {
               const f = FLAG_LABELS[flag] ?? { label: flag, icon: '⚠', color: 'var(--muted)' };
@@ -229,13 +275,13 @@ function AssessmentSection({
               );
             })}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
 
-// ─── Comparison card (CENTERPIECE) ───────────────────────────────────────────
+// ─── Comparison card (HERO) ───────────────────────────────────────────────────
 
 function ComparisonCard({ route }: { route: RouteDecision }) {
   const { shipDirect, warehouseAlt, carbonKgSaved } = route.cost;
@@ -247,30 +293,48 @@ function ComparisonCard({ route }: { route: RouteDecision }) {
   return (
     <div
       className="rounded-2xl border overflow-hidden"
-      style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}
+      style={{
+        background: 'var(--surface)',
+        borderColor: moneySaved > 0 ? 'rgba(74,222,128,0.35)' : 'var(--border)',
+      }}
     >
-      {/* Header */}
-      <div className="px-5 pt-5 pb-3">
-        <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'var(--muted)' }}>
-          Cost comparison
+      {/* ── Hero savings ─────────────────────────────────────────────────────── */}
+      <div
+        className="px-5 pt-5 pb-4"
+        style={{ background: 'rgba(74,222,128,0.06)', borderBottom: '1px solid rgba(74,222,128,0.15)' }}
+      >
+        <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: '#4ade80' }}>
+          Bridge saves you
         </p>
-        <p className="text-sm font-medium" style={{ color: 'var(--foreground)' }}>
-          Every Bridge route is checked against the warehouse alternative
-        </p>
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <p className="text-5xl font-black tracking-tight leading-none" style={{ color: '#4ade80' }}>
+              {formatINR(Math.max(0, moneySaved))}
+            </p>
+            <p className="text-sm mt-1" style={{ color: 'var(--muted)' }}>
+              vs the old warehouse route
+            </p>
+          </div>
+          <div className="text-right shrink-0">
+            <p className="text-2xl font-black" style={{ color: '#4ade80' }}>
+              {Math.max(0, carbonKgSaved).toFixed(0)} kg
+            </p>
+            <p className="text-xs" style={{ color: 'var(--muted)' }}>CO₂ avoided 🌍</p>
+          </div>
+        </div>
       </div>
 
-      {/* Two-column grid */}
-      <div className="grid grid-cols-2 gap-3 px-5 pb-4">
+      {/* ── Two-column comparison ─────────────────────────────────────────────── */}
+      <div className="grid grid-cols-2 gap-3 p-4">
 
-        {/* ── Ship Direct ──────────────────────────────────────────────── */}
+        {/* Ship Direct */}
         <div
-          className="rounded-2xl p-4 flex flex-col gap-3 relative overflow-hidden"
+          className="rounded-2xl p-4 flex flex-col gap-3"
           style={{
             background: isDirectChosen ? 'rgba(74,222,128,0.07)' : 'var(--surface-raised)',
             border: `2px solid ${isDirectChosen ? '#4ade80' : 'var(--border)'}`,
           }}
         >
-          {/* Top row */}
           <div className="flex items-center justify-between">
             <span className="text-base">🚀</span>
             {isDirectChosen && (
@@ -282,25 +346,18 @@ function ComparisonCard({ route }: { route: RouteDecision }) {
               </span>
             )}
           </div>
-
           <p className="text-xs font-semibold" style={{ color: isDirectChosen ? '#4ade80' : 'var(--muted)' }}>
             Ship Direct
           </p>
-
-          {/* Big price */}
           <div>
-            <p
-              className="text-3xl font-black tracking-tight"
-              style={{ color: isDirectChosen ? 'var(--foreground)' : 'var(--muted)' }}
-            >
+            <p className="text-2xl font-black"
+              style={{ color: isDirectChosen ? 'var(--foreground)' : 'var(--muted)' }}>
               {formatINR(shipDirect)}
             </p>
             <p className="text-xs mt-0.5" style={{ color: 'var(--muted)' }}>logistics</p>
           </div>
-
-          {/* Carbon */}
           <div
-            className="flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-lg w-fit"
+            className="flex items-center gap-1.5 text-xs px-2 py-1.5 rounded-lg w-fit"
             style={{
               background: isDirectChosen ? 'rgba(74,222,128,0.12)' : 'var(--surface)',
               color: isDirectChosen ? '#4ade80' : 'var(--muted)',
@@ -310,14 +367,10 @@ function ComparisonCard({ route }: { route: RouteDecision }) {
           </div>
         </div>
 
-        {/* ── Via Warehouse ─────────────────────────────────────────────── */}
+        {/* Via Warehouse */}
         <div
           className="rounded-2xl p-4 flex flex-col gap-3"
-          style={{
-            background: 'var(--surface-raised)',
-            border: '2px solid var(--border)',
-            opacity: 0.72,
-          }}
+          style={{ background: 'var(--surface-raised)', border: '2px solid var(--border)', opacity: 0.7 }}
         >
           <div className="flex items-center justify-between">
             <span className="text-base">🏭</span>
@@ -328,57 +381,29 @@ function ComparisonCard({ route }: { route: RouteDecision }) {
               LEGACY
             </span>
           </div>
-
           <p className="text-xs font-semibold" style={{ color: 'var(--muted)' }}>Via Warehouse</p>
-
           <div>
             <p
-              className="text-3xl font-black tracking-tight"
+              className="text-2xl font-black"
               style={{ color: 'var(--muted)', textDecoration: 'line-through', textDecorationColor: '#f87171' }}
             >
               {formatINR(warehouseAlt)}
             </p>
             <p className="text-xs mt-0.5" style={{ color: 'var(--muted)' }}>logistics</p>
           </div>
-
           <div
-            className="flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-lg w-fit"
+            className="flex items-center gap-1.5 text-xs px-2 py-1.5 rounded-lg w-fit"
             style={{ background: 'rgba(248,113,113,0.08)', color: '#f87171' }}
           >
             💨 {warehouseCarbonKg} kg CO₂
           </div>
         </div>
       </div>
-
-      {/* ── Savings banner ───────────────────────────────────────────────── */}
-      <div
-        className="mx-5 mb-5 rounded-xl px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-3"
-        style={{ background: 'rgba(74,222,128,0.08)', border: '1px solid rgba(74,222,128,0.2)' }}
-      >
-        <div className="flex items-center gap-2">
-          <span className="text-xl">🎉</span>
-          <div>
-            <p className="text-xs font-semibold" style={{ color: 'var(--muted)' }}>Total savings</p>
-            <p className="text-base font-black" style={{ color: '#4ade80' }}>
-              {formatINR(moneySaved)} saved
-            </p>
-          </div>
-        </div>
-        <div
-          className="flex items-center gap-2 px-3 py-1.5 rounded-lg"
-          style={{ background: 'rgba(74,222,128,0.12)' }}
-        >
-          <span>🌍</span>
-          <p className="text-sm font-bold" style={{ color: '#4ade80' }}>
-            {carbonKgSaved} kg CO₂ avoided
-          </p>
-        </div>
-      </div>
     </div>
   );
 }
 
-// ─── Route decision section ───────────────────────────────────────────────────
+// ─── Route section ────────────────────────────────────────────────────────────
 
 function RouteSection({
   route,
@@ -389,9 +414,13 @@ function RouteSection({
 }) {
   const nav = useRouter();
   const [confirming, setConfirming] = useState(false);
+  const [accepting, setAccepting] = useState(false);
   const [err, setErr] = useState<string | null>(null);
 
-  const pathMeta = PATH_META[route.path] ?? { label: route.path, icon: '✓', color: 'var(--foreground)', bg: 'var(--surface-raised)' };
+  const pathMeta = PATH_META[route.path] ?? {
+    label: route.path, icon: '✓', color: 'var(--foreground)', bg: 'var(--surface-raised)',
+  };
+  const pathContext = PATH_CONTEXT[route.path];
 
   const handleConfirm = useCallback(async () => {
     setConfirming(true);
@@ -410,6 +439,26 @@ function RouteSection({
     }
   }, [itemId, route, nav]);
 
+  const handleAcceptAll = useCallback(async () => {
+    setAccepting(true);
+    setErr(null);
+    try {
+      const res = await fetch(`/api/items/${itemId}/accept-all`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ route }),
+      });
+      if (!res.ok) throw new Error('Accept failed');
+      nav.push('/');
+      nav.refresh();
+    } catch {
+      setErr('Something went wrong — try the step-by-step flow instead.');
+      setAccepting(false);
+    }
+  }, [itemId, route, nav]);
+
+  const busy = confirming || accepting;
+
   return (
     <div className="flex flex-col gap-4">
       {/* Section divider */}
@@ -421,13 +470,15 @@ function RouteSection({
         <div className="flex-1 h-px" style={{ background: 'var(--border)' }} />
       </div>
 
-      {/* Path badge + reason */}
+      {/* Hero: comparison card FIRST */}
+      <ComparisonCard route={route} />
+
+      {/* Path badge + reason + context */}
       <div
         className="rounded-2xl p-5 border flex flex-col gap-3"
         style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}
       >
         <div className="flex items-center gap-3">
-          {/* Large path badge */}
           <div
             className="flex items-center gap-2.5 px-4 py-2.5 rounded-full"
             style={{ background: pathMeta.bg }}
@@ -442,10 +493,14 @@ function RouteSection({
         <p className="text-sm leading-relaxed" style={{ color: 'var(--foreground)' }}>
           {route.reason}
         </p>
-      </div>
 
-      {/* Comparison card — the centerpiece */}
-      <ComparisonCard route={route} />
+        {pathContext && (
+          <p className="text-xs leading-relaxed px-3 py-2.5 rounded-xl"
+            style={{ background: 'var(--surface-raised)', color: 'var(--muted)' }}>
+            {pathContext}
+          </p>
+        )}
+      </div>
 
       {/* Error */}
       {err && (
@@ -455,15 +510,15 @@ function RouteSection({
         </div>
       )}
 
-      {/* Confirm button */}
+      {/* Buttons */}
       <button
         onClick={handleConfirm}
-        disabled={confirming}
+        disabled={busy}
         className="w-full text-sm font-bold py-3.5 rounded-full transition-opacity active:opacity-80"
         style={{
-          background: confirming ? 'var(--surface-raised)' : 'var(--accent)',
-          color: confirming ? 'var(--muted)' : '#fff',
-          cursor: confirming ? 'not-allowed' : 'pointer',
+          background: busy ? 'var(--surface-raised)' : 'var(--accent)',
+          color: busy ? 'var(--muted)' : '#fff',
+          cursor: busy ? 'not-allowed' : 'pointer',
         }}
       >
         {confirming ? (
@@ -476,11 +531,36 @@ function RouteSection({
           `Confirm ${pathMeta.label} →`
         )}
       </button>
+
+      <button
+        onClick={handleAcceptAll}
+        disabled={busy}
+        className="w-full text-sm font-semibold py-3 rounded-full border transition-opacity active:opacity-80"
+        style={{
+          borderColor: busy ? 'var(--border)' : 'var(--border)',
+          color: busy ? 'var(--muted)' : 'var(--foreground)',
+          background: busy ? 'var(--surface-raised)' : 'var(--surface)',
+          cursor: busy ? 'not-allowed' : 'pointer',
+        }}
+      >
+        {accepting ? (
+          <span className="flex items-center justify-center gap-2">
+            <span className="w-3.5 h-3.5 rounded-full border-2 animate-spin inline-block"
+              style={{ borderColor: 'var(--muted)', borderTopColor: 'transparent' }} />
+            Processing…
+          </span>
+        ) : (
+          'Just take it away ↗'
+        )}
+      </button>
+      <p className="text-xs text-center" style={{ color: 'var(--muted)' }}>
+        Skip the handoff steps — Bridge handles everything, credits awarded instantly
+      </p>
     </div>
   );
 }
 
-// ─── Main export ─────────────────────────────────────────────────────────────
+// ─── Main export ──────────────────────────────────────────────────────────────
 
 export default function AssessmentView({
   itemId,
@@ -502,19 +582,7 @@ export default function AssessmentView({
       .catch((e: unknown) => setError(e instanceof Error ? e.message : 'Assessment failed'));
   }, [itemId]);
 
-  if (error) {
-    return (
-      <div className="flex flex-col items-center gap-4 py-20 text-center max-w-sm mx-auto">
-        <span className="text-4xl">⚠</span>
-        <p className="text-sm font-medium" style={{ color: '#f87171' }}>{error}</p>
-        <p className="text-xs" style={{ color: 'var(--muted)' }}>
-          Check that <code>GEMINI_API_KEY</code> is set in your .env and restart the dev server.
-        </p>
-        <Link href="/" className="text-sm underline" style={{ color: 'var(--muted)' }}>← Back</Link>
-      </div>
-    );
-  }
-
+  if (error) return <ErrorState message={error} itemId={itemId} />;
   if (!result) return <LoadingState />;
 
   return (
