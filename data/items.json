@@ -61,10 +61,11 @@
       "grade": {
         "condition": "damaged",
         "defects": [
-          "severely cracked front screen",
-          "severely cracked back glass"
+          "Severely cracked front screen",
+          "Shattered back glass",
+          "Scratches and scuffs on device frame"
         ],
-        "summary": "The phone exhibits extensive physical damage, including a severely cracked front screen and shattered back glass.",
+        "summary": "The phone is significantly damaged with a severely cracked front screen, shattered back glass, and visible scuffs on the frame.",
         "confidence": 0.95
       },
       "price": 2850,

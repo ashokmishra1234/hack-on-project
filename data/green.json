@@ -1,0 +1,39 @@
+{
+  "user-current": {
+    "userId": "user-current",
+    "totalCredits": 172,
+    "totalCo2Kg": 97,
+    "entries": [
+      {
+        "id": "g-1781415848799",
+        "userId": "user-current",
+        "itemId": "item-003",
+        "action": "buy_refurbished",
+        "credits": 97,
+        "co2KgAvoided": 72,
+        "description": "OnePlus Nord CE 3 Lite 5G routed for refurbishment",
+        "createdAt": "2026-06-14T05:44:08.799Z"
+      },
+      {
+        "id": "seed-g1",
+        "userId": "user-current",
+        "itemId": "prev-item-1",
+        "action": "resell",
+        "credits": 50,
+        "co2KgAvoided": 20,
+        "description": "Sold Samsung Galaxy A52 directly to buyer",
+        "createdAt": "2025-11-20T10:30:00.000Z"
+      },
+      {
+        "id": "seed-g2",
+        "userId": "user-current",
+        "itemId": "prev-item-2",
+        "action": "donate",
+        "credits": 25,
+        "co2KgAvoided": 5,
+        "description": "Donated Borosil Glass Set to local NGO",
+        "createdAt": "2025-12-05T14:00:00.000Z"
+      }
+    ]
+  }
+}

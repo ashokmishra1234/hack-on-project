@@ -1,0 +1,57 @@
+[
+  {
+    "id": "item-001",
+    "title": "Nike Air Max 270 — Men's UK 9",
+    "category": "footwear",
+    "brand": "Nike",
+    "originalPrice": 12995,
+    "ageMonths": 14,
+    "location": { "lat": 12.9716, "lng": 77.5946, "city": "Bengaluru" },
+    "ownerId": "user-current",
+    "photos": []
+  },
+  {
+    "id": "item-002",
+    "title": "Philips Avent Baby Monitor",
+    "category": "baby",
+    "brand": "Philips",
+    "originalPrice": 8499,
+    "ageMonths": 22,
+    "location": { "lat": 12.9716, "lng": 77.5946, "city": "Bengaluru" },
+    "ownerId": "user-current",
+    "photos": []
+  },
+  {
+    "id": "item-003",
+    "title": "OnePlus Nord CE 3 Lite",
+    "category": "phones",
+    "brand": "OnePlus",
+    "originalPrice": 19999,
+    "ageMonths": 9,
+    "location": { "lat": 12.9716, "lng": 77.5946, "city": "Bengaluru" },
+    "ownerId": "user-current",
+    "photos": []
+  },
+  {
+    "id": "item-004",
+    "title": "Levi's Winter Puffer Jacket",
+    "category": "clothing",
+    "brand": "Levi's",
+    "originalPrice": 4499,
+    "ageMonths": 30,
+    "location": { "lat": 12.9716, "lng": 77.5946, "city": "Bengaluru" },
+    "ownerId": "user-current",
+    "photos": []
+  },
+  {
+    "id": "item-005",
+    "title": "Prestige Iris Mixer Grinder",
+    "category": "kitchen",
+    "brand": "Prestige",
+    "originalPrice": 3150,
+    "ageMonths": 41,
+    "location": { "lat": 12.9716, "lng": 77.5946, "city": "Bengaluru" },
+    "ownerId": "user-current",
+    "photos": []
+  }
+]

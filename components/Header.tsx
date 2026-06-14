@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import { getTrustRecord, isTrustedSeller } from '@/lib/trust';
+import { getGreenRecord } from '@/lib/green';
 
 export default function Header() {
   const trust   = getTrustRecord('user-current');
+  const green   = getGreenRecord('user-current');
   const trusted = isTrustedSeller(trust.score);
 
   return (
@@ -27,24 +29,39 @@ export default function Header() {
           </span>
         </Link>
 
-        {/* User + Trust Score */}
-        <nav className="flex items-center gap-3">
+        {/* Nav */}
+        <nav className="flex items-center gap-2 sm:gap-3">
           <span className="text-sm font-medium hidden sm:block" style={{ color: 'var(--muted)' }}>
             Arjun V.
           </span>
 
+          {/* Green credits pill */}
+          <Link
+            href="/dashboard"
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold transition-colors"
+            style={{
+              background: 'rgba(74,222,128,0.10)',
+              color: '#4ade80',
+              border: '1px solid rgba(74,222,128,0.25)',
+            }}
+            title="Green Credits — view dashboard"
+          >
+            🌱 {green.totalCredits}
+          </Link>
+
           {/* Trust score pill */}
-          <div
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold"
+          <Link
+            href="/dashboard"
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold transition-colors"
             style={{
               background: trusted ? 'rgba(249,115,22,0.12)' : 'var(--surface-raised)',
               color:      trusted ? 'var(--accent)'          : 'var(--muted)',
               border:     `1px solid ${trusted ? 'rgba(249,115,22,0.3)' : 'var(--border)'}`,
             }}
-            title="Your Trust Score"
+            title="Trust Score — view dashboard"
           >
             🛡 {trust.score}
-          </div>
+          </Link>
 
           {/* Avatar */}
           <div

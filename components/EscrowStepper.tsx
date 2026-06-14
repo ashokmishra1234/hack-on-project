@@ -285,11 +285,19 @@ function CompletionStep({
   oldScore,
   newScore,
   delta,
+  credits,
+  co2KgAvoided,
+  newItemId,
+  buyerCity,
 }: {
   outcome: 'accept' | 'dispute';
   oldScore: number;
   newScore: number;
   delta: number;
+  credits: number;
+  co2KgAvoided: number;
+  newItemId: string | null;
+  buyerCity: string | null;
 }) {
   const accepted = outcome === 'accept';
 
@@ -373,13 +381,70 @@ function CompletionStep({
         </p>
       </div>
 
-      <Link
-        href="/"
-        className="w-full text-sm font-bold py-3 rounded-full text-center transition-opacity"
-        style={{ background: 'var(--accent)', color: '#fff' }}
-      >
-        Back to My Items
-      </Link>
+      {/* Green Credits (on accept only) */}
+      {accepted && credits > 0 && (
+        <div
+          className="w-full rounded-2xl border p-5 flex flex-col gap-3 text-left"
+          style={{ background: 'var(--surface)', borderColor: 'rgba(74,222,128,0.25)' }}
+        >
+          <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: '#4ade80' }}>
+            Green Credits earned
+          </p>
+
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-3xl">🌱</span>
+              <span className="text-3xl font-black" style={{ color: '#4ade80' }}>
+                +{credits}
+              </span>
+            </div>
+            <div className="text-right">
+              <p className="text-lg font-bold" style={{ color: 'var(--foreground)' }}>
+                {co2KgAvoided.toFixed(1)} kg
+              </p>
+              <p className="text-xs" style={{ color: 'var(--muted)' }}>CO₂ avoided</p>
+            </div>
+          </div>
+
+          <p className="text-xs" style={{ color: 'var(--muted)' }}>
+            {buyerCity
+              ? `This item went to ${buyerCity} — one less product in landfill.`
+              : 'This item gets a second life — one less product in landfill.'}
+          </p>
+        </div>
+      )}
+
+      {/* The Loop notice */}
+      {accepted && newItemId && (
+        <div
+          className="w-full rounded-2xl border p-4 flex flex-col gap-2 text-left"
+          style={{ background: 'rgba(74,222,128,0.04)', borderColor: 'rgba(74,222,128,0.2)' }}
+        >
+          <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: '#4ade80' }}>
+            ♻ The loop continues
+          </p>
+          <p className="text-xs" style={{ color: 'var(--muted)' }}>
+            This product is now pre-enrolled for its next second life. The buyer can re-sell it in one tap — no photos needed.
+          </p>
+        </div>
+      )}
+
+      <div className="flex flex-col gap-2 w-full">
+        <Link
+          href="/"
+          className="w-full text-sm font-bold py-3 rounded-full text-center transition-opacity"
+          style={{ background: 'var(--accent)', color: '#fff' }}
+        >
+          Back to My Items
+        </Link>
+        <Link
+          href="/dashboard"
+          className="w-full text-sm font-semibold py-3 rounded-full text-center border transition-opacity"
+          style={{ borderColor: 'var(--border)', color: 'var(--muted)' }}
+        >
+          View impact dashboard →
+        </Link>
+      </div>
     </div>
   );
 }
@@ -399,6 +464,10 @@ export default function EscrowStepper({
   const [outcome, setOutcome] = useState<'accept' | 'dispute' | null>(null);
   const [newScore, setNewScore] = useState<number | null>(null);
   const [delta, setDelta] = useState<number | null>(null);
+  const [credits, setCredits] = useState(0);
+  const [co2KgAvoided, setCo2KgAvoided] = useState(0);
+  const [newItemId, setNewItemId] = useState<string | null>(null);
+  const [buyerCity, setBuyerCity] = useState<string | null>(null);
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -418,6 +487,10 @@ export default function EscrowStepper({
       setOutcome(o);
       setNewScore(data.newScore);
       setDelta(data.delta);
+      setCredits(data.credits ?? 0);
+      setCo2KgAvoided(data.co2KgAvoided ?? 0);
+      setNewItemId(data.newItemId ?? null);
+      setBuyerCity(data.buyerCity ?? null);
       setStep(5);
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : 'Something went wrong');
@@ -473,6 +546,10 @@ export default function EscrowStepper({
           oldScore={trustRecord.score}
           newScore={newScore}
           delta={delta}
+          credits={credits}
+          co2KgAvoided={co2KgAvoided}
+          newItemId={newItemId}
+          buyerCity={buyerCity}
         />
       )}
 
