@@ -57,23 +57,20 @@
       },
       "reason": "Broken or missing parts detected — professional repair needed to restore resale value."
     },
-    "assessment": {
-      "grade": {
-        "condition": "damaged",
-        "defects": [
-          "Severely cracked front screen",
-          "Shattered back glass",
-          "Scratches and scuffs on device frame"
-        ],
-        "summary": "The phone is significantly damaged with a severely cracked front screen, shattered back glass, and visible scuffs on the frame.",
-        "confidence": 0.95
+    "verification": {
+      "status": "fail",
+      "result": {
+        "isMatch": false,
+        "observedProduct": "iPhone (various models)",
+        "brandMatch": false,
+        "categoryMatch": true,
+        "confidence": 1,
+        "reason": "The customer photos clearly show iPhones (Apple brand) and not a OnePlus phone; visible text confirms 'iPhone' and 'iPhone 16' in one image."
       },
-      "price": 2850,
-      "matchedBuyerId": "b1",
-      "nearbyDemand": 0.2,
-      "riskFlags": [
-        "needs_data_wipe"
-      ]
+      "consecutiveFailures": 1,
+      "flaggedForReview": false,
+      "identityVerified": false,
+      "verifiedAt": "2026-06-14T08:44:44.705Z"
     }
   },
   {
